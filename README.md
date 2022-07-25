@@ -13,3 +13,37 @@ were bound to the  `WASD`
 a suitable picture in PNG format was selected as a `field` for a snake, and an icon in the corresponding form as an `apple`.
 a `snake` is just an array consisting of a snake's head of a separate `color` and the rest of the body (array).
 
+## Methods 
+```
+function drawGame(){
+    /* основная функция запуска игры */
+
+    // отрисовка добавленных изображений поля и яблока
+    ctx.drawImage(ground, 0, 0);
+    ctx.drawImage(foodImg, food.x, food.y);
+
+    // создание змеики 
+    for (let i = 0; i < snake.length; i++){
+        ctx.fillStyle = i == 0 ? "white" : "green";
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+    }
+
+    // отрисовка счета score
+    ctx.fillStyle = "white";
+    ctx.font = "50px Arial";
+    ctx.fillText(score, box * 2, box * 1.5);
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    // появление и поедание яблок
+    if (snakeX == food.x && snakeY == food.y ){
+        score++;
+        food = {
+            x: Math.floor(Math.random() * 17 + 1) * box,
+            y: Math.floor(Math.random() * 15 + 3) * box
+        };
+    } else {
+        snake.pop();
+    }
+```
